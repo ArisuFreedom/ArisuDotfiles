@@ -5,4 +5,5 @@
 .config/torbrowser/
 .config/Electron/
 .config/discord/
-
+.config/keepassxc/
+.config/QTProject.conf/

@@ -1,0 +1,9 @@
+[submodule ".config/dmenu"]
+	path = .config/dmenu
+	url = https://github.com/ArisuFreedom/dmenu
+[submodule ".config/dwm"]
+	path = .config/dwm
+	url = https://github.com/ArisuFreedom/dwm
+[submodule ".config/st"]
+	path = .config/st
+	url = https://github.com/ArisuFreedom/st

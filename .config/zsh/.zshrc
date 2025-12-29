@@ -21,10 +21,10 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-# só carrega se for interativo
+# Interactive
 [[ $- != *i* ]] && return
 
-# histórico
+# History
 [ -d "$XDG_STATE_HOME/zsh" ] || mkdir -p "$XDG_STATE_HOME/zsh"
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 SAVEHIST=10000
@@ -53,30 +53,27 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # Aliases
-alias startx='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
-alias ls='eza -l --color=always --group-directories-first --icons --git'
-alias lla='eza -al --color=always --group-directories-first --icons --git'
-alias la='eza -a --color=always --group-directories-first --icons --git'
-alias ll='eza -l --color=always --group-directories-first --icons --git'
-alias lt='eza -aT --color=always --group-directories-first --icons --git'
+alias c='clear'
+alias clip='xclip -selection clipboard'
 alias df='df -h'
 alias du='du -h'
+alias la='eza -a --color=always --group-directories-first --icons --git'
+alias ll='eza -l --color=always --group-directories-first --icons --git'
+alias lla='eza -al --color=always --group-directories-first --icons --git'
+alias ls='eza -l --color=always --group-directories-first --icons --git'
+alias lt='eza -aT --color=always --group-directories-first --icons --git'
 alias mkdir='mkdir -p'
-alias sudo='doas'
 alias rm='rm -f'
 alias rmdir='rm -rf'
-alias c='clear'
+alias startx='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
+alias sudo='doas'
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
-alias clip='xclip -selection clipboard'
 
 # Edit mode
 bindkey -e
 bindkey '^L' clear-screen
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-
-# Funções
-[[ -f "$ZDOTDIR/functions.zsh" ]] && source "$ZDOTDIR/functions.zsh"
 
 # evals
 eval "$(zoxide init zsh --hook prompt --cmd cd)"

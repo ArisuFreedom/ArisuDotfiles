@@ -14,7 +14,6 @@ vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.title = true
 
--- Preenchendo caracteres para separar janelas e mostrar o fim do buffer
 vim.opt.fillchars = { vert = '|', fold = '-', eob = ' ', lastline = '@' }
 vim.opt.listchars = { tab = '>-', space = '.', trail = '~', eol = '$' }
 

@@ -1,0 +1,64 @@
+# ~/.mkshrc
+# mksh interactive shell config (POSIX-friendly)
+
+# ANSI Colors
+RED=$'\033[31m'
+GREEN=$'\033[32m'
+YELLOW=$'\033[33m'
+BLUE=$'\033[34m'
+MAGENTA=$'\033[35m'
+CYAN=$'\033[36m'
+BOLD=$'\033[1m'
+RESET=$'\033[0m'
+
+############################
+# Aliases
+############################
+alias c='clear'
+alias clip='xclip -selection clipboard'
+alias df='df -h'
+alias du='du -h'
+alias la='eza -a --color=always --group-directories-first --icons --git'
+alias ll='eza -l --color=always --group-directories-first --icons --git'
+alias lla='eza -al --color=always --group-directories-first --icons --git'
+alias ls='eza -l --color=always --group-directories-first --icons --git'
+alias lt='eza -aT --color=always --group-directories-first --icons --git'
+alias mkdir='mkdir -p'
+alias rm='rm -f'
+alias rmdir='rm -rf'
+alias startx='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
+alias sudo='doas'
+alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
+
+############################
+# History (mksh)
+############################
+export HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/mksh/history"
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+mkdir -p "$(dirname "$HISTFILE")"
+
+############################
+# Keybindings (mksh)
+############################
+
+# Emacs mode
+set -o emacs
+bind '^L=clear-screen'
+
+# pwd
+_short_pwd() {
+  print -r -- "${PWD##*/}"
+}
+
+############################
+# Prompt
+############################
+# simple, fast and stable
+PS1='${CYAN}${HOST%%.*}${RESET} ${MAGENTA}${RESET} ${YELLOW}$(_short_pwd)${RESET} $ '
+
+############################
+# zoxide (POSIX mode)
+############################
+eval "$(zoxide init posix --hook prompt --cmd cd)"
+

@@ -52,6 +52,7 @@ These tools improve navigation and search efficiency in Emacs, making file and c
 Your shell environment is powered by modern and efficient utilities designed to boost productivity from the command line. These include:
 
 + zsh — A powerful and customizable shell
++ mksh — A minimal shell that sucks less
 + zoxide — A smarter cd command for quicker directory switching
 + eza — A modern replacement for ls, with features like colors and icons
 + bat — A cat clone with syntax highlighting and Git integration
@@ -71,7 +72,7 @@ sudo pacman -Syu
 
 # Core dependencies
 sudo pacman -S xmonad xmonad-contrib xmobar xdotool picom dunst trayer picom \
-    maim xclip zsh zoxide eza bat fzf fd ripgrep starship git
+    maim xclip zsh mksh zoxide eza bat fzf fd ripgrep starship git
 #+end_src
 
 pacman installs binary packages directly from the official repos and keeps the system up to date.
@@ -87,7 +88,7 @@ sudo apt update && sudo apt upgrade
 
 # Core dependencies
 sudo apt install xmonad xmonad-contrib xmobar xdotool picom dunst trayer maim \
-    xclip zsh zoxide fzf fd-find ripgrep batcat
+    xclip zsh zoxide mksh fzf fd-find ripgrep batcat
 
 # starship prompt (installation via shell script)
 curl -sS https://starship.rs/install.sh | sh
@@ -104,7 +105,7 @@ sudo dnf update
 
 # Core dependencies
 sudo dnf install xmonad xmonad-contrib xmobar xdotool picom dunst trayer maim \
-    xclip zsh zoxide eza fzf fd-find ripgrep bat
+    xclip zsh zoxide eza fzf fd-find ripgrep bat mksh
 
 # starship prompt (official recommended install)
 curl -sS https://starship.rs/install.sh | sh
@@ -119,7 +120,7 @@ Gentoo uses Portage and emerge, which builds packages from source by default:
 #+begin_src shell
 sudo emerge --sync
 sudo emerge --ask xmonad xmonad-contrib xmobar xdotool picom dunst trayer maim \
-    xclip zsh zoxide eza fzf fd-find ripgrep bat
+    xclip zsh mksh zoxide eza fzf fd ripgrep bat
 #+end_src
 
 On Gentoo, many packages are compiled from source. Depending on your USE flags and system profile, this may take longer, but you gain flexibility and optimization.

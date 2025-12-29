@@ -23,7 +23,7 @@ import XMonad.Util.Run (safeSpawn)
 import XMonad.Util.SpawnOnce
 import qualified XMonad.Util.Hacks as Hacks
 
--- Módulos criados
+-- My libs
 import Vars
 import Theme
 import Scratchpads

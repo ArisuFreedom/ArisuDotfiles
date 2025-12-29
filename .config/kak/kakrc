@@ -57,9 +57,9 @@ hook global ModeChange (push|pop):insert:.* %{
     unset-face window SecondaryCursorEol
 }
 
-# Cor da seleção principal
+# Primary selection color
 set-face global PrimarySelection "black,blue"
 
-# Se quiser também ajustar a seleção secundária
+# Secundary selection color
 set-face global SecondarySelection "black,bright-blue"
 

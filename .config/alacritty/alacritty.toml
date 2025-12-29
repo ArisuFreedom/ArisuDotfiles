@@ -1,34 +1,35 @@
 [general]
-# Recarrega config automaticamente ao salvar
+# Reload config automatically on save
 live_config_reload = true
 
-# Importa o tema Kanagawa Dragon
+# Import Kanagawa Dragon theme
 import = [
   "~/.config/alacritty/themes/themes/kanagawa_dragon.toml"
 ]
 
 # -------------------------------------------------------------------
-# Fontes
+# Fonts
 # -------------------------------------------------------------------
 [font]
-# Tamanho da fonte em pts
+# Font size in pts
 size = 12.0
 
-# Fonte normal
+# Normal font
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
-# Fonte em negrito
+# Bold font
 [font.bold]
 family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
-# Fonte itálica
+# Italic font
 [font.italic]
 family = "JetBrainsMono Nerd Font"
 style = "Italic"
 
+# Bold Italic font
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
 style = "Bold Italic"
@@ -37,19 +38,19 @@ style = "Bold Italic"
 # Cursor
 # -------------------------------------------------------------------
 [cursor]
-# Cursor shape + blinking juntos (objeto)
+# Cursor shape + blinking together (object)
 style = { shape = "Block", blinking = "Always" }
 
-# Intervalo de blink em ms (quanto mais baixo, mais rápido)
+# Blink interval in ms (lower = faster)
 blink_interval = 750
 
-# Tempo após o qual o cursor pára de piscar (0 = nunca para)
+# Time after which the cursor stops blinking (0 = never stops)
 blink_timeout = 0
 
-# Faz com que o cursor fique oco quando a janela não estiver em foco
+# Make the cursor hollow when the window is not focused
 unfocused_hollow = true
 
-# Espessura do cursor relativa à célula (0.0–1.0)
+# Cursor thickness relative to the cell (0.0–1.0)
 thickness = 0.20
 
 # -------------------------------------------------------------------
@@ -60,7 +61,7 @@ history = 10000
 multiplier = 3
 
 # -------------------------------------------------------------------
-# Seleção
+# Selection
 # -------------------------------------------------------------------
 [selection]
 save_to_clipboard = true
@@ -72,12 +73,12 @@ save_to_clipboard = true
 TERM = "xterm-256color"
 
 # -------------------------------------------------------------------
-# Window / Aparência
+# Window / Appearance
 # -------------------------------------------------------------------
 [window]
 dynamic_padding = true
-decorations = "full"    # borda + barra de título
+decorations = "full"    # border + title bar
 opacity = 1.00
 
-# Padding interno (espaço em torno do conteúdo)
+# Inner padding (space around content)
 padding = { x = 6, y = 6 }

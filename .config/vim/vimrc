@@ -1,0 +1,126 @@
+" =========================================
+"  VIMINFO
+" =========================================
+set viminfofile=$XDG_STATE_HOME/vim/viminfo
+
+" =========================================
+"  ENCODING
+" =========================================
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
+set fillchars=vert:│,fold:-,eob:~,lastline:@
+set listchars=tab:›-,space:·,trail:◀,eol:↲
+
+" =========================================
+"  UI
+" =========================================
+syntax on
+set number
+set relativenumber
+set cursorline
+set title
+
+" Somente ASCII para máxima compatibilidade
+set fillchars=vert:\|,fold:-,eob:\ ,lastline:@
+set listchars=tab:>-,space:.,trail:~,eol:$
+
+" Enviar yank/copiar para o clipboard do sistema
+set clipboard=unnamedplus
+
+" =========================================
+"  INDENT
+" =========================================
+set autoindent
+set smartindent
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" =========================================
+"  SEARCH
+" =========================================
+set ignorecase
+set smartcase
+set incsearch
+set nohls
+let @/ = ""
+set gdefault
+
+" =========================================
+"  COMPLETION / MENUS
+" =========================================
+set complete+=kspell
+set completeopt=menuone,longest
+set wildmenu
+set wildmode=longest,full
+set wildoptions=pum
+set shortmess+=c
+
+" =========================================
+"  SCROLL
+" =========================================
+set scrolloff=2
+
+" =========================================
+"  BUFFERS / SPLITS
+" =========================================
+set splitbelow
+set splitright
+
+" =========================================
+"  FILES / BACKUPS
+" =========================================
+set noswapfile
+set nobackup
+set backspace=indent,eol,start
+set path=.,**
+
+set undofile
+set undodir=~/.vim/undo
+
+" =========================================
+"  INSERT MODE
+" =========================================
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+augroup relative_numbers
+  autocmd!
+  autocmd InsertEnter * set norelativenumber
+  autocmd InsertLeave * set relativenumber
+augroup END
+
+" =========================================
+"  RANDOM
+" =========================================
+set noerrorbells
+set visualbell t_vb=
+filetype plugin indent on
+
+augroup last_position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ exe "normal! g`\"" |
+        \ endif
+augroup END
+
+autocmd BufWritePre * if &ft != 'markdown' | %s/\s\+$//e | endif
+
+" =========================================
+"  NEW FILES IN INSERT MODE
+" =========================================
+autocmd BufNewFile * startinsert
+
+" =========================================
+"  INSERT MODE WITHOUT A FILE NAME
+" =========================================
+autocmd VimEnter * if empty(expand("%")) | startinsert | endif
+
+" =========================================
+"  INSERT MODE START IN EMPTY FILES
+" =========================================
+autocmd VimEnter * if getfsize(expand("%")) == 0 | startinsert | endif
+

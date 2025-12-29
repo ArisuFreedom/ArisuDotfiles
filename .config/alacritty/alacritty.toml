@@ -1,0 +1,83 @@
+[general]
+# Recarrega config automaticamente ao salvar
+live_config_reload = true
+
+# Importa o tema Kanagawa Dragon
+import = [
+  "~/.config/alacritty/themes/themes/kanagawa_dragon.toml"
+]
+
+# -------------------------------------------------------------------
+# Fontes
+# -------------------------------------------------------------------
+[font]
+# Tamanho da fonte em pts
+size = 12.0
+
+# Fonte normal
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+# Fonte em negrito
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+# Fonte itálica
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+# -------------------------------------------------------------------
+# Cursor
+# -------------------------------------------------------------------
+[cursor]
+# Cursor shape + blinking juntos (objeto)
+style = { shape = "Block", blinking = "Always" }
+
+# Intervalo de blink em ms (quanto mais baixo, mais rápido)
+blink_interval = 750
+
+# Tempo após o qual o cursor pára de piscar (0 = nunca para)
+blink_timeout = 0
+
+# Faz com que o cursor fique oco quando a janela não estiver em foco
+unfocused_hollow = true
+
+# Espessura do cursor relativa à célula (0.0–1.0)
+thickness = 0.20
+
+# -------------------------------------------------------------------
+# Scrolling
+# -------------------------------------------------------------------
+[scrolling]
+history = 10000
+multiplier = 3
+
+# -------------------------------------------------------------------
+# Seleção
+# -------------------------------------------------------------------
+[selection]
+save_to_clipboard = true
+
+# -------------------------------------------------------------------
+# Terminal Environment
+# -------------------------------------------------------------------
+[env]
+TERM = "xterm-256color"
+
+# -------------------------------------------------------------------
+# Window / Aparência
+# -------------------------------------------------------------------
+[window]
+dynamic_padding = true
+decorations = "full"    # borda + barra de título
+opacity = 1.00
+
+# Padding interno (espaço em torno do conteúdo)
+padding = { x = 6, y = 6 }

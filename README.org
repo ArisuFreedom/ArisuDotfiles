@@ -1,0 +1,139 @@
+#+TITLE: Arisu's Dotfiles
+#+AUTHOR: Arisu
+#+DESCRIPTION: A personal repository for my dotfiles
+
+* TABLE OF CONTENTS
+- [[#getting-started][Getting Started]]
+  - [[#xmonad-config][Xmonad Config]]
+  - [[#emacs-config][Emacs Config]]
+  - [[#shell-config][Shell Config]]
+  - [[#installing-on-your-favorite-distro][Installing on Your Favorite Distro]]
+- [[#screenshots-images][Screenshots / Images]]
+
+* GETTING STARTED
+** DEPENDENCIES
+
+*** XMONAD CONFIG
+
+The following list contains the core programs needed to ensure your Xmonad window manager works smoothly and integrates seamlessly with your graphical environment:
+
++ xwallpaper — A minimal wallpaper utility
++ volumeicon — A volume systray icon
++ xdotool — Used for simulating keyboard/mouse input and automating window actions
++ A terminal emulator of your choice
++ maim — Screenshot utility
++ xclip — Provides clipboard integration
++ xmonad — The tiling window manager used in this setup
++ xmonad-contrib — Official community-contributed modules for extended functionality
++ xmobar — A lightweight, highly customizable status bar
++ An application launcher of your choice (e.g., rofi or dmenu)
++ trayer — A lightweight system tray utility
++ picom — Compositor for window transparency and effects
++ amixer — Controls sound and volume levels
++ A file manager of your choice
++ An application locker (for secure session locking)
++ A web browser for general usage
++ dunst — A minimal and customizable notification daemon
++ A nerd font for icon compatibility in the status bar and terminal
+
+Together, this suite ensures your graphical workflow is both complete and responsive, giving you a powerful and flexible desktop experience.
+
+*** Emacs Config
+
+This configuration ensures your Emacs setup runs smoothly with enhanced performance and functionality. In particular, it includes:
+
++ fd — A fast and user-friendly alternative to find for locating files
++ ripgrep — A lightning-fast search tool for text within files
+
+These tools improve navigation and search efficiency in Emacs, making file and content discovery much quicker.
+
+*** Shell Config
+
+Your shell environment is powered by modern and efficient utilities designed to boost productivity from the command line. These include:
+
++ zsh — A powerful and customizable shell
++ zoxide — A smarter cd command for quicker directory switching
++ eza — A modern replacement for ls, with features like colors and icons
++ bat — A cat clone with syntax highlighting and Git integration
++ fzf — A general-purpose fuzzy finder to speed up searching through files and history
++ starship — A fast, customizable shell prompt with useful contextual information
+
+This set of tools combines usability and performance, making your terminal environment both aesthetically pleasing and highly efficient.
+
+*** Installing on your favorite distro
+
+**** Arch Linux (and Arch-based distros)
+
+Use pacman, the native package manager:
+
+#+begin_src shell
+sudo pacman -Syu
+
+# Core dependencies
+sudo pacman -S xmonad xmonad-contrib xmobar xdotool picom dunst trayer picom \
+    maim xclip zsh zoxide eza bat fzf fd ripgrep starship git
+#+end_src
+
+pacman installs binary packages directly from the official repos and keeps the system up to date.
+
+You can also use an AUR helper (like yay) if something isn’t available in the official repos.
+
+**** Debian / Ubuntu
+
+Use apt, Debian and Ubuntu’s package manager:
+
+#+begin_src shell
+sudo apt update && sudo apt upgrade
+
+# Core dependencies
+sudo apt install xmonad xmonad-contrib xmobar xdotool picom dunst trayer maim \
+    xclip zsh zoxide fzf fd-find ripgrep batcat
+
+# starship prompt (installation via shell script)
+curl -sS https://starship.rs/install.sh | sh
+#+end_src
+
+On Debian/Ubuntu, the fd binary is sometimes named fdfind due to naming conflicts. It can be aliased to fd.
+
+**** Fedora
+
+Use dnf, Fedora’s package manager:
+
+#+begin_src shell
+sudo dnf update
+
+# Core dependencies
+sudo dnf install xmonad xmonad-contrib xmobar xdotool picom dunst trayer maim \
+    xclip zsh zoxide eza fzf fd-find ripgrep bat
+
+# starship prompt (official recommended install)
+curl -sS https://starship.rs/install.sh | sh
+#+end_src
+
+Fedora packages are managed as RPMs and installed via dnf install.
+
+**** Gentoo
+
+Gentoo uses Portage and emerge, which builds packages from source by default:
+
+#+begin_src shell
+sudo emerge --sync
+sudo emerge --ask xmonad xmonad-contrib xmobar xdotool picom dunst trayer maim \
+    xclip zsh zoxide eza fzf fd-find ripgrep bat
+#+end_src
+
+On Gentoo, many packages are compiled from source. Depending on your USE flags and system profile, this may take longer, but you gain flexibility and optimization.
+
+For tools not available as ebuilds, you may need to add overlays or create custom ebuilds.
+
+* SCREENSHOTS / IMAGES
+
+Feel free to send me screenshots of your setup below for visual documentation.
+
+** Screenshot 1
+
+#+begin_html
+<img src="./Pictures/Screenshots/screen1.png" alt="Main desktop layout" width="800">
+#+end_html
+
+* END

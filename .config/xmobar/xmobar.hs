@@ -6,20 +6,21 @@ import Xmobar
 import System.Directory
 
 --------------------------------------------------------------------------------
--- CORES (declarativas)
+-- COLORS
 --------------------------------------------------------------------------------
 
-colorBg       = "#181616"
-colorFg       = "#c5c9c5"
-colorLowWhite = "#c8c093"
-colorBlue     = "#8ba4b0"
-colorCyan     = "#8ea4a2"
-colorMagenta  = "#a292a3"
-colorRed      = "#c4746e"
-colorYellow   = "#c4b28a"
+colorBg       = "#141415" -- primary.background
+colorFg       = "#cdcdcd" -- primary.foreground
+
+colorLowWhite = "#aeaed1" -- cyan suave
+colorBlue     = "#6e94b2"
+colorCyan     = "#aeaed1"
+colorMagenta  = "#bb9dbd"
+colorRed      = "#d8647e"
+colorYellow   = "#f3be7c"
 
 --------------------------------------------------------------------------------
--- DISPOSITIVOS (declarativos)
+-- DEVICES
 --------------------------------------------------------------------------------
 
 wifiDevice     = "/sys/class/net/wlan0/"
@@ -125,7 +126,8 @@ baseConfig = defaultConfig
     , bgColor         = colorBg
     , fgColor         = colorFg
     , border          = BottomB
-    , borderColor     = colorYellow
+    , borderColor     = colorBlue
+    --, borderColor     = colorYellow
     , position        = TopSize L 100 26
     , lowerOnStart    = True
     , hideOnStart     = False

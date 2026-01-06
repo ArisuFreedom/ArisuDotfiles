@@ -21,6 +21,7 @@ set number
 set relativenumber
 set cursorline
 set title
+set termguicolors
 
 " Somente ASCII para máxima compatibilidade
 set fillchars=vert:\|,fold:-,eob:\ ,lastline:@

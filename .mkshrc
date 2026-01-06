@@ -46,16 +46,25 @@ mkdir -p "$(dirname "$HISTFILE")"
 set -o emacs
 bind '^L=clear-screen'
 
+############################
+# Prompt
+############################
+# simple, fast and stable
 # pwd
 _short_pwd() {
   print -r -- "${PWD##*/}"
 }
 
-############################
-# Prompt
-############################
-# simple, fast and stable
-PS1='${CYAN}${HOST%%.*}${RESET} ${MAGENTA}${RESET} ${YELLOW}$(_short_pwd)${RESET} $ '
+_git_branch() {
+  git symbolic-ref --short HEAD 2>/dev/null
+}
+
+_exit_status() {
+  [ $? -ne 0 ] && print -r -- "${RED}✗${RESET}"
+}
+
+PS1='${BOLD}${CYAN}${USER}@${HOST%%.*}${RESET} ${BLUE}$(_short_pwd)${RESET} ${GREEN} $(_git_branch)${RESET}
+${MAGENTA}❯${RESET} $(_exit_status) '
 
 ############################
 # zoxide (POSIX mode)

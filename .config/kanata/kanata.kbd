@@ -1,0 +1,12 @@
+(defcfg
+  process-unmapped-keys yes
+  linux-x11-repeat-delay-rate 300,50
+)
+
+(defsrc
+  caps
+)
+
+(deflayer base
+  lctrl
+)

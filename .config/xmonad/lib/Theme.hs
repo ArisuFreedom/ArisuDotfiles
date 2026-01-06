@@ -22,20 +22,22 @@ import XMonad.Prompt
 import XMonad.Prompt.FuzzyMatch
 import XMonad.Prompt.Shell
 
--- | Cores principais
-colorBg       = "#181616"
-colorFg       = "#c5c9c5"
-colorLowWhite = "#c8c093"
-colorBlue     = "#8ba4b0"
-colorCyan     = "#8ea4a2"
-colorMagenta  = "#a292a3"
-colorRed      = "#c4746e"
-colorText     = "#c5c9c5"
-colorYellow   = "#c4b28a"
+-- | Colors
+colorBg       = "#141415" -- background
+colorFg       = "#cdcdcd" -- foreground
+colorText     = "#cdcdcd"
 
--- | Bordas
-borderNormal  = "#0d0c0c"
-borderFocused = "#e6c384"
+colorLowWhite = "#aeaed1" -- cyan suave (normal.white/cyan vibe)
+colorBlue     = "#6e94b2"
+colorCyan     = "#aeaed1"
+colorMagenta  = "#bb9dbd"
+colorRed      = "#d8647e"
+colorYellow   = "#f3be7c"
+
+-- | Borders
+borderNormal  = "#252530" -- normal.black
+--borderFocused = "#f3be7c" -- yellow (destaque)
+borderFocused = colorBlue
 
 -- | Fonts
 myFont     = "JetBrainsMono Nerd Font Mono:size=11"

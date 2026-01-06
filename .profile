@@ -44,6 +44,11 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BROWSER="librewolf"
 
 ############################
+# FZF Colorscheme
+############################
+export FZF_DEFAULT_OPTS="--color=fg:#cdcdcd --color=bg:#141415 --color=hl:#f3be7c --color=fg+:#aeaed1 --color=bg+:#252530 --color=hl+:#f3be7c --color=border:#606079 --color=header:#6e94b2 --color=gutter:#141415 --color=spinner:#7fa563 --color=info:#f3be7c --color=pointer:#aeaed1 --color=marker:#d8647e --color=prompt:#bb9dbd"
+
+############################
 # Java / GPG / Ripgrep
 ############################
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"

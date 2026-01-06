@@ -16,6 +16,9 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+# load Colors
+autoload -U colors && colors
+
 # load completions
 autoload -U compinit && compinit
 
@@ -54,14 +57,14 @@ compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # Aliases
 alias c='clear'
+alias vim='nvim'
 alias clip='xclip -selection clipboard'
 alias df='df -h'
 alias du='du -h'
-alias la='eza -a --color=always --group-directories-first --icons --git'
-alias ll='eza -l --color=always --group-directories-first --icons --git'
-alias lla='eza -al --color=always --group-directories-first --icons --git'
-alias ls='eza -l --color=always --group-directories-first --icons --git'
-alias lt='eza -aT --color=always --group-directories-first --icons --git'
+alias ls='ls --color'
+alias la='ls -a --color'
+alias ll='ls -l --color'
+alias llh='ls -alh --color'
 alias mkdir='mkdir -p'
 alias rm='rm -f'
 alias rmdir='rm -rf'
@@ -76,6 +79,5 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
 # evals
-eval "$(zoxide init zsh --hook prompt --cmd cd)"
 eval "$(fzf --zsh)"
 eval "$(starship init zsh)"

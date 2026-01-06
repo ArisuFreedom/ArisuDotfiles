@@ -1,44 +1,45 @@
 -- =========================================
 --  ENCODING
 -- =========================================
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
-vim.opt.fileencodings = 'utf-8'
+vim.o.encoding = 'utf-8'
+vim.o.fileencoding = 'utf-8'
+vim.o.fileencodings = 'utf-8'
 
 -- =========================================
 --  UI
 -- =========================================
 vim.cmd('syntax on')
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.title = true
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.cursorline = true
+vim.o.title = true
 
+vim.o.termguicolors = true
 vim.opt.fillchars = { vert = '|', fold = '-', eob = ' ', lastline = '@' }
 vim.opt.listchars = { tab = '>-', space = '.', trail = '~', eol = '$' }
 
 -- =========================================
 --  CLIPBOARD
 -- =========================================
-vim.opt.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus'
 
 -- =========================================
 --  INDENT
 -- =========================================
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
 
 -- =========================================
 --  SEARCH
 -- =========================================
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = false
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.incsearch = true
+vim.o.hlsearch = false
 vim.g['/'] = "" -- Limpa a busca
 
 -- =========================================
@@ -54,13 +55,13 @@ vim.opt.shortmess:append('c')
 -- =========================================
 --  SCROLL
 -- =========================================
-vim.opt.scrolloff = 2
+vim.o.scrolloff = 2
 
 -- =========================================
 --  BUFFERS / SPLITS
 -- =========================================
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+vim.o.splitbelow = true
+vim.o.splitright = true
 
 -- =========================================
 --  FILES / BACKUPS
@@ -70,8 +71,8 @@ vim.opt.backup = false
 vim.opt.backspace = { 'indent', 'eol', 'start' }
 vim.opt.path = { '.', '**' }
 
-vim.opt.undofile = true
-vim.opt.undodir = '~/.vim/undo'
+vim.o.undofile = true
+vim.o.undodir = '/home/arch/.local/state/nvim/undo'
 
 -- =========================================
 --  RELATIVE NUMBERS IN INSERT MODE
@@ -89,8 +90,8 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 -- =========================================
 --  RANDOM
 -- =========================================
-vim.opt.errorbells = false
-vim.opt.visualbell = true
+vim.o.errorbells = false
+vim.o.visualbell = true
 vim.cmd('filetype plugin indent on')
 
 -- =========================================
@@ -124,6 +125,38 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- =========================================
 --  INSERT MODE START IN EMPTY FILES
 -- =========================================
-vim.api.nvim_create_autocmd("VimEnter", {
-  command = "if getfsize(expand('%')) == 0 | startinsert | endif",
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   command = "if getfsize(expand('%')) == 0 | startinsert | endif",
+-- })
+
+-- =========================================
+--  KEYBINDS
+-- =========================================
+-- Alias for easy mapping
+local map = vim.keymap.set
+
+-- Leader key
+vim.g.mapleader = " "
+
+-- Source Current file
+map('n', '<leader>o', '<Cmd>update<CR> :source<CR>', { desc = "Save and source current file" })
+
+-- Save current file
+map('n', '<leader>w', '<Cmd>update<CR>', { desc = "Save current file" })
+
+-- ; instead of :
+map({'n', 'v', 'x' }, ';', ':', { noremap = true })
+map({'n', 'v', 'x' }, ':', ';', { noremap = true })
+
+-- Norm biding
+map({ 'n', 'v' }, '<leader>n', ':norm')
+
+-- System Clipboard
+map({ 'n', 'v' }, '<leader>y', '"+y')
+map({ 'n', 'v' }, '<leader>d', '"+d')
+
+-- =========================================
+--  PLUGINS
+-- =========================================
+-- Colorscheme
+vim.cmd("colorscheme vague")

@@ -16,7 +16,7 @@
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  ;; Load straight.el bootstrap file
+  ;; Load the straight.el bootstrap file
   (load bootstrap-file nil 'nomessage))
 
 ;; Integrate straight.el with use-package
@@ -29,17 +29,17 @@
 ;; Default UI cleanup
 ;; -----------------------------
 
-;; Disable startup screen and messages
+;; Disable the startup screen and messages
 (setq inhibit-startup-message t)
 (setq inhibit-startup-screen t)
 
-;; <<< AQUI: Mensagem customizada no scratch >>>
+;; <<< HERE: Custom message in scratch buffer >>>
 (setq initial-scratch-message ";; Welcome to GNU Emacs, Arisu!\n;; Enjoy your Session!\n")
 
-;; Disable bell sound
+;; Disable the bell sound
 (setq ring-bell-function 'ignore)
 
-;; Cursor and current line
+;; Cursor and highlight current line
 (blink-cursor-mode 0)
 (global-hl-line-mode 1)
 
@@ -48,12 +48,12 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 
-;; Disable line numbers in specific modes
+;; Disable line numbers in certain modes
 (dolist (mode '(term-mode shell-mode eshell-mode))
   (add-hook (intern (format "%s-hook" mode))
             (lambda () (display-line-numbers-mode 0))))
 
-;; Use y/n instead of yes/no
+;; Use y/n instead of yes/no prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Smoother scrolling
@@ -66,8 +66,8 @@
 
 (use-package beacon
   :config
-  ;; (setq beacon-push-mark 35) ;; empurra o mark quando o ponto se move >35 linhas
-  (beacon-mode 1))  ;; ativa globalmente
+  ;; (setq beacon-push-mark 35) ;; push mark when point moves >35 lines
+  (beacon-mode 1))  ;; enable globally
 
 ;; Install Evil and Evil Collection
 (straight-use-package 'evil)
@@ -86,8 +86,8 @@
     ;; Enable Evil globally
     :config
     (evil-mode 1)
-    
-    ;; evil redo functionallity
+
+    ;; Evil redo functionality
     (define-key evil-normal-state-map (kbd "C-r") #'evil-redo)
     (define-key evil-normal-state-map (kbd "U") #'evil-redo)
 )
@@ -121,8 +121,8 @@
     "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
     "TAB TAB" '(comment-line :wk "Comment lines"))
 
+  ;; Buffer navigation
   (arisu/leader
-    ;; Buffers
     "b" '(:ignore t :wk "buffer")
     "b b" '(switch-to-buffer :wk "Switch buffer")
     "b i" '(ibuffer :wk "Ibuffer")
@@ -131,21 +131,22 @@
     "b p" '(previous-buffer :wk "Previous buffer")
     "b r" '(revert-buffer :wk "Reload buffer"))
 
+  ;; Evaluation shortcuts
   (arisu/leader
-    "e" '(:ignore t :wk "Evaluate")    
+    "e" '(:ignore t :wk "Evaluate")
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e d" '(eval-defun :wk "Evaluate defun containing or after point")
-    "e e" '(eval-expression :wk "Evaluate and elisp expression")
-    "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
-    "e r" '(eval-region :wk "Evaluate elisp in region")) 
+    "e e" '(eval-expression :wk "Evaluate an elisp expression")
+    "e l" '(eval-last-sexp :wk "Evaluate elisp before point"))
 
+  ;; Help and reload config
   (arisu/leader
     "h" '(:ignore t :wk "Help")
     "h f" '(describe-function :wk "Describe function")
     "h v" '(describe-variable :wk "Describe variable")
     "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :wk "Reload emacs config"))
-    ;; "h r r" '(reload-init-file :wk "Reload emacs config"))
 
+  ;; Toggle settings
   (arisu/leader
     "t" '(:ignore t :wk "Toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
@@ -165,7 +166,7 @@
                     :family "JetBrainsMono Nerd Font Mono"
                     :height 120)
 
-;; italic comments
+;; Italic comments
 (set-face-attribute 'font-lock-comment-face nil
                     :slant 'italic)
 
@@ -189,7 +190,6 @@
   ;; load theme
   (load-theme 'kanagawa-dragon t))
 
-;; which-key shows popup of possible keybindings after prefix
 (use-package which-key
   :straight t
   :config
@@ -205,7 +205,7 @@
         which-key-max-description-length 25
         which-key-allow-imprecise-window-fit t
         which-key-separator " → ")
-  (which-key-mode))  ;; ativa o which-key automaticamente
+  (which-key-mode))  ;; enable which-key
 
 (use-package sudo-edit
   :config
@@ -219,7 +219,6 @@
 
 (use-package ivy
   :bind
-  ;; ivy-resume resumes the last Ivy-based completion.
   (("C-c C-r" . ivy-resume)
    ("C-x B" . ivy-switch-buffer-other-window))
   :custom
@@ -236,7 +235,7 @@
 (use-package ivy-rich
   :after ivy
   :ensure t
-  :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+  :init (ivy-rich-mode 1)
   :custom
   (ivy-virtual-abbreviate 'full
    ivy-rich-switch-buffer-align-virtual-buffer t
@@ -245,41 +244,26 @@
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
 
-;; Haskell Mode + LSP
-
 (use-package haskell-mode
   :hook (haskell-mode . interactive-haskell-mode)
-  ;; associa as extensões .hs e .lhs
   :mode (("\\.hs\\'" . haskell-mode)
          ("\\.lhs\\'" . literate-haskell-mode)))
-
-;; Haskell LSP (Language Server)
-;;(use-package lsp-mode
-;;  :commands lsp
-;;  :hook (haskell-mode . lsp))
-
-;; Optional: integração com interface de completions
-;;(use-package company
-;;  :hook (haskell-mode . company-mode))
-
-;; Optional: UI para LSP
-;;(use-package lsp-ui
-;;  :commands lsp-ui-mode)
 
 (use-package toc-org
   :straight t
   :hook (org-mode . toc-org-enable))
 
-;; Org indent
+;; Enable org indent
 (add-hook 'org-mode-hook #'org-indent-mode)
 
-;; Org visual line
+;; Enable visual line in org
 (add-hook 'org-mode-hook 'visual-line-mode)
-;; org-bullets
+
+;; Org bullets for prettier headers
 (use-package org-bullets
   :straight t
   :hook (org-mode . org-bullets-mode))
 
-(electric-indent-mode -1)
+(electric-indent-mode -1)  ;; Disable auto-indentation in Org
 
-(require 'org-tempo)
+(require 'org-tempo)  ;; Enable Org-tempo for easy source block templates

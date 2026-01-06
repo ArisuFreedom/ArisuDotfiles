@@ -2,9 +2,13 @@
 # Reload config automatically on save
 live_config_reload = true
 
-# Import Kanagawa Dragon theme
+# to install the themes
+# mkdir -p ~/.config/alacritty/themes
+# git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+
+# Import theme
 import = [
-  "~/.config/alacritty/themes/themes/kanagawa_dragon.toml"
+  "~/.config/alacritty/themes/themes/vague.toml"
 ]
 
 # -------------------------------------------------------------------

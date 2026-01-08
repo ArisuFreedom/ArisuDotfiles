@@ -1,28 +1,15 @@
 # zshrc
 
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-
-# source zinit plugin manager
-source "${ZINIT_HOME}/zinit.zsh"
-
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-
 # load Colors
 autoload -U colors && colors
 
 # load completions
-autoload -U compinit && compinit
-
-zinit cdreplay -q
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 # Interactive
 [[ $- != *i* ]] && return
@@ -47,13 +34,20 @@ export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --group-directories-first --icons --git $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always --group-directories-first --icons --git $realpath'
 
 # completions cache
 [ -d "$XDG_CACHE_HOME/zsh" ] || mkdir -p "$XDG_CACHE_HOME/zsh"
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+
+# Cool Opts
+setopt autocd # just type the directory end press enter
+setopt auto_param_slash # when a dir is completed, add a / instead of a trailing space
+setopt no_case_glob no_case_match # make cmp case insensitive
+setopt globdots # include dotfiles
+setopt extended_glob # match ~ # ^
+setopt interactive_comments # allow comments in interactive shell
+stty stop undef # disable accidental ctrl s
 
 # Aliases
 alias c='clear'
@@ -67,16 +61,22 @@ alias ll='ls -l --color'
 alias llh='ls -alh --color'
 alias mkdir='mkdir -p'
 alias rm='rm -f'
-alias rmdir='rm -rf'
 alias startx='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
 alias sudo='doas'
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
+alias nohup='nohup > ~/.local/state/nohup/nohup.out 2>&1'
+
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
 
 # Edit mode
 bindkey -e
 bindkey '^L' clear-screen
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^x^e' edit-command-line
+bindkey ' ' magic-space
 
 # evals
 eval "$(fzf --zsh)"

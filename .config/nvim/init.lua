@@ -160,3 +160,4 @@ map({ 'n', 'v' }, '<leader>d', '"+d')
 -- =========================================
 -- Colorscheme
 vim.cmd("colorscheme vague")
+

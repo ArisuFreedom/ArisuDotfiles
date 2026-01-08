@@ -18,11 +18,11 @@ alias c='clear'
 alias clip='xclip -selection clipboard'
 alias df='df -h'
 alias du='du -h'
-alias la='eza -a --color=always --group-directories-first --icons --git'
-alias ll='eza -l --color=always --group-directories-first --icons --git'
-alias lla='eza -al --color=always --group-directories-first --icons --git'
-alias ls='eza -l --color=always --group-directories-first --icons --git'
-alias lt='eza -aT --color=always --group-directories-first --icons --git'
+alias la='ls -a --color=always'
+alias ll='ls -l --color=always'
+alias lla='ls -al --color=always'
+alias ls='ls -l --color=always'
+alias lt='ls -aT --color=always'
 alias mkdir='mkdir -p'
 alias rm='rm -f'
 alias rmdir='rm -rf'
@@ -65,9 +65,4 @@ _exit_status() {
 
 PS1='${BOLD}${CYAN}${USER}@${HOST%%.*}${RESET} ${BLUE}$(_short_pwd)${RESET} ${GREEN} $(_git_branch)${RESET}
 ${MAGENTA}❯${RESET} $(_exit_status) '
-
-############################
-# zoxide (POSIX mode)
-############################
-eval "$(zoxide init posix --hook prompt --cmd cd)"
 

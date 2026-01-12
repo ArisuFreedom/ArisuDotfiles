@@ -24,7 +24,7 @@ myStartupHook = do
     spawnOnce "xrandr --output DisplayPort-2 --mode 1920x1080 --rate 100 --rotate normal --brightness 1.0"
 
     -- Wallpaper
-    spawnOnce "xwallpaper --zoom ~/Pictures/Wallpapers/persepolis-shirdal.png"
+    spawnOnce "xwallpaper --zoom ~/Pictures/Wallpapers/lonely-house.jpg"
 
     -- Compositor
     spawnOnce "picom -b --config ~/.config/picom/picom.conf"

@@ -25,21 +25,21 @@ myFloats = ["feh"
 -- | Regras de shift por classe de janela
 myClassShifts :: [(String, String)]
 myClassShifts =
-  [ ("discord-ptb"  , "話"  )  -- irc → 話
-  , ("discord"      , "話"  )
-  , ("firefox-esr"  , "電"  )  -- www → 電
-  , ("librewolf"    , "電"  )
-  , ("tor-browser"  , "電"  )
-  , ("qutebrowser"  , "電"  )
-  , ("spotify"      , "音"  )  -- music → 音
-  , ("youtube-music", "音"  )
-  , ("PrismLauncher", "遊"  )  -- games → 遊
-  , ("Vim"          , "闇"  )  -- doom → 闇
-  , ("nvim"         , "闇"  )
-  , ("Gvim"         , "闇"  )
-  , ("emacs"        , "闇"  )
-  , ("vis"          , "闇"  )
-  , ("vi"           , "闇"  )
+  [ ("discord-ptb"  , "3"  )  -- irc → 話
+  , ("discord"      , "3"  )
+  , ("firefox-esr"  , "2"  )  -- www → 電
+  , ("librewolf"    , "2"  )
+  , ("tor-browser"  , "2"  )
+  , ("qutebrowser"  , "2"  )
+  , ("spotify"      , "5"  )  -- music → 音
+  , ("youtube-music", "5"  )
+  , ("PrismLauncher", "4"  )  -- games → 遊
+  , ("Vim"          , "1"  )  -- doom → 闇
+  , ("nvim"         , "1"  )
+  , ("Gvim"         , "1"  )
+  , ("emacs"        , "1"  )
+  , ("vis"          , "1"  )
+  , ("vi"           , "1"  )
   ]
 
 -- | Regras de flutuação por nome
@@ -53,5 +53,5 @@ myManageHook = composeAll . concat $
   , [ className =? c --> doCenterFloat      | c       <- myFloats      ]
   , [ name'     =? n --> doCenterFloat      | n       <- myNames       ]
   , [ isDialog       --> doFloat                                       ]
-  , [ className >>= \c -> if "Minecraft" `isInfixOf` c then doShift "遊" else mempty ]
+  , [ className >>= \c -> if "Minecraft" `isInfixOf` c then doShift "4" else mempty ]
   ]

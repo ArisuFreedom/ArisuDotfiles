@@ -32,13 +32,13 @@ myMiscDir  = "."
 -- | Tópicos com ações
 topicItems :: [TopicItem]
 topicItems =
-  [ TI "闇" mySysDir    (pure ())
-  , TI "電" myWebDir    (pure ())
-  , TI "話" myVimDir    (pure ())
-  , TI "遊" myChatDir   (pure ())
-  , TI "音" myMusicDir  (pure ())
-  , TI "文" myGamesDir  (pure ())
-  , TI "無" myMiscDir   (pure ())
+  [ TI "1" mySysDir    (pure ())
+  , TI "2" myWebDir    (pure ())
+  , TI "3" myVimDir    (pure ())
+  , TI "4" myChatDir   (pure ())
+  , TI "5" myMusicDir  (pure ())
+  , TI "6" myGamesDir  (pure ())
+  , TI "7" myMiscDir   (pure ())
   ]
 
 -- | Lista de nomes de workspaces
@@ -51,7 +51,7 @@ myTopicConfig = def
   { topicDirs          = tiDirs topicItems
   , topicActions       = tiActions topicItems
   , defaultTopicAction = const (pure ())
-  , defaultTopic       = "闇"
+  , defaultTopic       = "1"
   }
 
 -- | Funções de navegação

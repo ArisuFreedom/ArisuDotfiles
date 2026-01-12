@@ -29,7 +29,7 @@ myPP = def
     ppWindow :: String -> String
     ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
-    -- Funções que usam as cores do Theme.hs
+    -- Colorscheme
     blue, lowWhite, magenta, red, white, yellow :: String -> String
     magenta  = xmobarColor colorMagenta  ""
     blue     = xmobarColor colorBlue     ""

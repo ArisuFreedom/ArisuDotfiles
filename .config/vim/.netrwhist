@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/arch/.config'
 let g:netrw_dirhist_0='/home/arch/.config/alacritty/themes/themes'
 let g:netrw_dirhist_9='/home/arch/.config/alacritty/themes'
 let g:netrw_dirhist_8='/home/arch/.dotfiles/.config/xmobar'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_5='/home/arch/.config/rc'
 let g:netrw_dirhist_4='/home/arch/.config'
 let g:netrw_dirhist_3='/home/arch/.config/mpv'
 let g:netrw_dirhist_2='/home/arch/.config/nvim'
-let g:netrw_dirhist_1='/home/arch/.config/xmonad/lib'

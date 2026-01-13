@@ -62,7 +62,7 @@ alias llh='ls -alh --color'
 alias mkdir='mkdir -p'
 alias rm='rm -f'
 alias startx='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
-alias sudo='doas'
+#alias sudo='doas'
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 alias nohup='nohup > ~/.local/state/nohup/nohup.out 2>&1'
 
@@ -81,3 +81,6 @@ bindkey ' ' magic-space
 # evals
 eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
+
+
+[ -f "/home/arch/.ghcup/env" ] && . "/home/arch/.ghcup/env" # ghcup-env

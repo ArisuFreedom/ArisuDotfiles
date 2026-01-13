@@ -10,7 +10,7 @@ import Vars
 -- Para compatibilidade Java/WM
 import XMonad.Hooks.SetWMName
 
--- | Comandos que devem rodar **uma vez**
+-- |
 myStartupHook :: X ()
 myStartupHook = do
 

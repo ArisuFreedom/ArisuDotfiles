@@ -55,9 +55,9 @@ myKeyBindings :: [(String, X ())] =
 
     -- Volume
     , ("<Print>"               , spawn screenshot  )
-    , ("<XF86AudioLowerVolume>", spawn "amixer -q set Headphone 5%- unmute" )
-    , ("<XF86AudioMute>"       , spawn "amixer -q set Headphone toggle"     )
-    , ("<XF86AudioRaiseVolume>", spawn "amixer -q set Headphone 5%+ unmute" )
+    , ("<XF86AudioLowerVolume>", spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"  )
+    , ("<XF86AudioMute>"       , spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" )
+    , ("<XF86AudioRaiseVolume>", spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"  )
 
     -- Workspace navigation
     , ("M-C-d", prevWS)

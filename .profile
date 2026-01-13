@@ -22,9 +22,20 @@ mkdir -p \
   "$XDG_BIN_HOME"
 
 ############################
+# RUNTIME DIR
+############################
+if [ -z "XDG_RUNTIME_DIR" ]; then
+    XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir"
+
+    mkdir -pm 0700 "$XDG_RUNTIME_DIR"
+    export XDG_RUNTIME_DIR
+fi
+
+############################
 # PATH
 ############################
 export PATH="$XDG_BIN_HOME:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
 
 ############################
 # Locale
@@ -67,3 +78,6 @@ export COLORTERM="truecolor"
 if [ "$TERM" = "tmux" ]; then
   export TERM="tmux-256color"
 fi
+
+
+[ -f "/home/arch/.ghcup/env" ] && . "/home/arch/.ghcup/env" # ghcup-env

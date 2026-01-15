@@ -44,6 +44,9 @@ myStartupHook = do
     -- Normal cursor instead of X one
     spawnOnce "xsetroot -cursor_name left_ptr"
 
+    -- Xresources
+    spawn "xrdb -merge ~/.config/X11/Xresources"
+
     -- Hide cursor
     spawnOnce "xhidecursor"
 

@@ -83,4 +83,4 @@ eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
 
-[ -f "/home/arch/.ghcup/env" ] && . "/home/arch/.ghcup/env" # ghcup-env
+[ -f "/home/arch/.local/share/ghcup/env" ] && . "/home/arch/.local/share/ghcup/env" # ghcup-env

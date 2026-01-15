@@ -46,7 +46,7 @@ export LC_ALL="C.UTF-8"
 ############################
 # Editor, Pager, Browser
 ############################
-export EDITOR="emacsclient -t -a ''"
+export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 export LESS="-R"
@@ -68,6 +68,7 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export GHCUP_USE_XDG_DIRS=true
 
 ############################
 # Terminal colors
@@ -79,5 +80,8 @@ if [ "$TERM" = "tmux" ]; then
   export TERM="tmux-256color"
 fi
 
+############################
+# GHCUP
+############################
 
-[ -f "/home/arch/.ghcup/env" ] && . "/home/arch/.ghcup/env" # ghcup-env
+[ -f "/home/arch/.local/share/ghcup/env" ] && . "/home/arch/.local/share/ghcup/env" # ghcup-env

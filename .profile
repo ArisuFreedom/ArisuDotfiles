@@ -13,12 +13,16 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
 
+export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+export XDG_CONFIG_DIRS="/etc/xdg"
+
 # Create directorys
 mkdir -p \
   "$XDG_CONFIG_HOME" \
   "$XDG_DATA_HOME" \
   "$XDG_CACHE_HOME" \
   "$XDG_STATE_HOME" \
+  "$HOME/.local/bin" \
   "$XDG_BIN_HOME"
 
 ############################
@@ -60,15 +64,16 @@ export BROWSER="librewolf"
 export FZF_DEFAULT_OPTS="--color=fg:#cdcdcd --color=bg:#141415 --color=hl:#f3be7c --color=fg+:#aeaed1 --color=bg+:#252530 --color=hl+:#f3be7c --color=border:#606079 --color=header:#6e94b2 --color=gutter:#141415 --color=spinner:#7fa563 --color=info:#f3be7c --color=pointer:#aeaed1 --color=marker:#d8647e --color=prompt:#bb9dbd"
 
 ############################
-# Java / GPG / Ripgrep
+# XDG
 ############################
-export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export GHCUP_USE_XDG_DIRS=true
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-export GHCUP_USE_XDG_DIRS=true
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 
 ############################
 # Terminal colors
@@ -83,5 +88,4 @@ fi
 ############################
 # GHCUP
 ############################
-
 [ -f "/home/arch/.local/share/ghcup/env" ] && . "/home/arch/.local/share/ghcup/env" # ghcup-env

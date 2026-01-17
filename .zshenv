@@ -3,3 +3,4 @@ export ZDOTDIR="$HOME/.config/zsh"
 
 # POSIX
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+. "$HOME/.cargo/env"

@@ -3,23 +3,24 @@ module StatusBar (mySB
       -- , toggleStrutsKey
          ) where
 
+import Theme
 import XMonad
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
-import XMonad.Util.Loggers
 import XMonad.Util.ClickableWorkspaces
-import Theme
+import XMonad.Util.Loggers
+import XMonad.Util.NamedScratchpad (scratchpadWorkspaceTag)
 
 myPP :: PP
-myPP = def
+myPP = (filterOutWsPP [scratchpadWorkspaceTag] def)
   { ppSep             = magenta " | "
-  , ppTitleSanitize   = xmobarStrip
+  , ppTitleSanitize   = const "" -- xmobarStrip
   , ppCurrent         = wrap " " "" . xmobarBorder "Top" colorBlue 2
   , ppHidden          = white . wrap " " ""
   , ppHiddenNoWindows = lowWhite . wrap " " ""
   , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-  , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
-  , ppExtras          = [logTitles formatFocused formatUnfocused]
+  , ppOrder           = \(ws:l:t:xs) -> [ws, l] -- \[ws, l, _, wins] -> [ws, l, wins]
+  , ppExtras          = [] -- [logTitles formatFocused formatUnfocused]
   }
   where
     -- Funções de formatação para janela focada e não focada

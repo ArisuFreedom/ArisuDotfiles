@@ -67,7 +67,8 @@ export FZF_DEFAULT_OPTS="--color=fg:#cdcdcd --color=bg:#141415 --color=hl:#f3be7
 # XDG
 ############################
 export GHCUP_USE_XDG_DIRS=true
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
@@ -80,12 +81,16 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 ############################
 export COLORTERM="truecolor"
 
-# tmux (POSIX)
-if [ "$TERM" = "tmux" ]; then
-  export TERM="tmux-256color"
-fi
-
 ############################
 # GHCUP
 ############################
 [ -f "/home/arch/.local/share/ghcup/env" ] && . "/home/arch/.local/share/ghcup/env" # ghcup-env
+. "$HOME/.cargo/env"
+
+###########################
+# RUST
+###########################
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+

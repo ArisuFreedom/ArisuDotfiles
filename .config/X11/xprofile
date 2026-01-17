@@ -27,8 +27,6 @@ xautolock -time 10 -locker slock &
 # Dbus
 export $(dbus-launch)
 
-# Pipewire
-pipewire &
-pipewire-pulse &
-wireplumber &
+# Kanata
+kanata &
 

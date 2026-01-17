@@ -8,6 +8,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops hiding (fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (isDialog, doCenterFloat)
+import XMonad.Hooks.Modal
 import XMonad.Hooks.RefocusLast (refocusLastLogHook)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP

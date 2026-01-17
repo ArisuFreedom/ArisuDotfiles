@@ -36,5 +36,10 @@ myStartupHook = do
     -- Volume icon for trayer
     spawnOnce "volumeicon"
 
+    -- Pipewire
+    spawnOnce "/usr/bin/pipewire &"
+    spawnOnce "/usr/bin/pipewire-pulse &"
+    spawnOnce "/usr/bin/wireeplumber &"
+
     -- Java/Swing
     setWMName "LG3D"

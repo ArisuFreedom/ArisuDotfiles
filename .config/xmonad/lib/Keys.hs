@@ -36,6 +36,7 @@ myKeyBindings :: [(String, X ())] =
 
     -- Prompts
     , ("M-?"        , manPrompt   myXPConfig )
+    , ("M-p"        , spawn launcher         )
     , ("M-S-p"      , shellPrompt myXPConfig )
 
     -- Apps favoritos

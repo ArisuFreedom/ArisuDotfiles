@@ -3,116 +3,133 @@
 module Main (main) where
 
 import Xmobar
-import System.Directory
 
 --------------------------------------------------------------------------------
 -- COLORS
 --------------------------------------------------------------------------------
 
-colorBg       = "#141415" -- primary.background
-colorFg       = "#cdcdcd" -- primary.foreground
-
-colorLowWhite = "#aeaed1" -- cyan suave
+colorBg       = "#141415"
+colorFg       = "#cdcdcd"
 colorBlue     = "#6e94b2"
-colorCyan     = "#aeaed1"
-colorMagenta  = "#bb9dbd"
 colorRed      = "#d8647e"
 colorYellow   = "#f3be7c"
+colorLowWhite = "#aeaed1"
+colorGray     = "#606060" -- Para os colchetes e separadores
+
+-- Helpers de cores para limpar o código
+blue   = xmobarColor colorBlue ""
+red    = xmobarColor colorRed ""
+yellow = xmobarColor colorYellow ""
+gray   = xmobarColor colorGray ""
+
+--------------------------------------------------------------------------------
+-- ICONS
+--------------------------------------------------------------------------------
+
+-- Helper para usar a fonte de ícones (index 1 nas additionalFonts)
+ico m    = "<fn=1>" ++ m ++ "</fn>"
+
+cpuIco   = ico "\xf2db"
+memIco   = ico "\xf0c9"
+netIco   = ico "\xf012"
+dateIco  = ico "\xf017"
+batOn    = ico "\xf1e6"
+batOff   = ico "\xf242"
+volIco   = ico "\xf028" -- fa-volume-high
+
+--------------------------------------------------------------------------------
+-- HELPERS
+--------------------------------------------------------------------------------
+
+xmobarColor fg bg = wrap ("<fc=" ++ fg ++ (if null bg then "" else "," ++ bg) ++ ">") "</fc>"
+wrap l r m = if null m then "" else l ++ m ++ r
+inSquare m = gray "[" ++ m ++ gray "]"
+
+-- Time Helpers (ex: 5s instead 50)
+s n = n * 10
+m n = n * 600
 
 --------------------------------------------------------------------------------
 -- DEVICES
 --------------------------------------------------------------------------------
 
-wifiDevice     = "/sys/class/net/wlan0/"
-wifiIface      = "wlan0"
-
-ethernetDevice = "/sys/class/net/enp34s0/"
-ethernetIface  = "enp34s0"
-
-batteryDevice  = "/sys/class/power_supply/BAT0"
-batteryName    = "BAT0"
-
-cpuTempDevice  = "/sys/class/hwmon/hwmon/temp1_input"
-cpuTempLabel   = "coretemp"
+ethernetIface = "enp34s0"
+batteryName   = "BAT0"
 
 --------------------------------------------------------------------------------
 -- MAIN
 --------------------------------------------------------------------------------
 
 main :: IO ()
-main = xmobar =<< configFromArgs =<< myConfig
+main = xmobar =<< configFromArgs myConfig
 
---------------------------------------------------------------------------------
---  MAIN DYNAMIC CONFIG
---------------------------------------------------------------------------------
+myConfig :: Config
+myConfig = baseConfig
+    { -- Template
+      template = " " ++ inSquare (blue dateIco ++ " %clock%") ++ " "
+                     ++ inSquare (blue dateIco ++ " %calendar%") ++ " "
+                     ++ inSquare (blue netIco ++ " %enp34s0%")
+                     ++ " } %UnsafeXMonadLog% { "
+                     ++ inSquare (blue cpuIco ++ " %cpu%") ++ " "
+                     ++ inSquare (blue memIco ++ " %memory%") ++ " "
+                     ++ inSquare (blue "%volume%") ++ " "
+                     ++ "%_XMONAD_TRAYPAD%"
 
-myConfig :: IO Config
-myConfig = do
+    , commands =
+        [ Run UnsafeXMonadLog
 
-    hasWifi     <- doesPathExist wifiDevice
-    hasEthernet <- doesPathExist ethernetDevice
-    hasBattery  <- doesPathExist batteryDevice
-    hasCPUTemp  <- doesPathExist cpuTempDevice
+        , Run $ Date (blue "%H:%M") "clock" (s 1)
 
-    let netCmds =
-            [ Run $ Network wifiIface
-                ["-t", "\62473 <fc=" ++ colorBlue ++ "><rx>KB</fc> | \62474 <fc="
-                       ++ colorBlue ++ "><tx>KB</fc>"]
-                10
-            | hasWifi ] <>
-            [ Run $ Network ethernetIface
-                ["-t", "\62473 <fc=" ++ colorBlue ++ "><rx>KB</fc> | \62474 <fc="
-                       ++ colorBlue ++ "><tx>KB</fc>"]
-                10
-            | hasEthernet ]
+        , Run $ Date (blue "%a, %d %b %Y") "calendar" (m 1)
 
-    let batCmds =
-            [ Run $ BatteryN [batteryName]
-                [ "-t", "<fc=" ++ colorYellow ++ ">Bat <left>% <watts>W</fc>"
-                , "-L", "5"
-                , "-H", "75"
-                , "--low", colorLowWhite
-                , "--normal", colorYellow
-                , "--high", colorRed
-                ]
-                50 batteryName
-            | hasBattery ]
 
-    let coreCmd =
-            [ Run $ CoreTemp ["-t","\62153 <fc=" ++ colorRed ++ "><core0>C</fc>"] 50
-            | hasCPUTemp ]
+        , Run $ Cpu
+            [ "-t", "<bar>" -- <total> for percent
+            , "--bback", "━"
+            , "--bfore", "▬"
+            , "--bwidth", "10"
+            , "-L", "30", "-H", "75"
+            , "--low", colorFg, "--normal", colorYellow, "--high", colorRed
+            , "--suffix", "True" -- Adiciona % automático
+            , "--ppad", "2"     -- Evita que a barra "pule" ao mudar dígitos
+            ] (s 1)
 
-    let templateParts =
-            [ "%UnsafeXMonadLog% }{ "
-            , "%multicpu% / "
-            , "%memory% / "
-            , "%date% / "
+        , Run $ Memory
+            [ "-t", "<usedbar>" -- <usedratio> for percent
+            , "--bback", "━"
+            , "--bfore", "▬"
+            , "--bwidth", "10"
+            , "-L", "30", "-H", "75"
+            , "--low", colorFg, "--normal", colorYellow, "--high", colorRed
+            , "--suffix", "True"
+            , "--ppad", "2"
+            ] (s 1)
+
+        , Run $ Network ethernetIface
+            [ "-t", blue "<rx>KB" ++ gray "|" ++ blue "<tx>KB"
+            ] (s 1)
+
+        , Run $ Com "sh"
+            [ "-c"
+            , "v=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'); n=$((v/10)); printf '%s %s' \"$v%\" \"" ++ volIco ++ " $(printf '▬%.0s' $(seq 1 $n))$(printf '━%.0s' $(seq 1 $((10-n))))\""
             ]
-            ++ [ "%wlan0% / "    | hasWifi     ]
-            ++ [ "%enp34s0% / "  | hasEthernet ]
-            ++ [ "%BAT0% / "     | hasBattery  ]
-            ++ [ "%coretemp% / " | hasCPUTemp  ]
-            ++ [ "%_XMONAD_TRAYPAD%"           ]
+            "volume"
+            (s 1)
 
-    pure baseConfig
-        { template = concat templateParts
-        , commands =
-            [ Run UnsafeXMonadLog
-            , Run $ Date
-                ("<fc=" ++ colorBlue ++ ">(%H:%M)</fc> - <fc=" ++ colorBlue ++ ">%b %d %Y</fc>")
-                "date" 10
-            , Run $ MultiCpu
-                ["-t","<fn=1>\62652</fn> <fc=" ++ colorLowWhite ++ "><total>%</fc>"]
-                10
-            , Run $ Memory
-                ["-t","<fn=1>\61381</fn> <fc=" ++ colorLowWhite ++ "><usedratio>%</fc>"]
-                10
-            , Run $ XPropertyLog "_XMONAD_TRAYPAD"
-            ]
-            <> netCmds
-            <> batCmds
-            <> coreCmd
-        }
+        , Run $ Battery
+            [ "-t", "<acstatus> <left>"
+            , "-L", "20", "-H", "80"
+            , "--low", colorRed, "--normal", colorYellow, "--high", colorBlue
+            , "--suffix", "True"
+            , "--"
+            , "--off", batOff ++ " "
+            , "--on",  blue batOn ++ " "
+            , "--idle", blue batOn ++ " "
+            ] (s 5)
+
+        , Run $ XPropertyLog "_XMONAD_TRAYPAD"
+        ]
+    }
 
 --------------------------------------------------------------------------------
 -- BASE CONFIG
@@ -120,20 +137,15 @@ myConfig = do
 
 baseConfig :: Config
 baseConfig = defaultConfig
-
-    { font            =   "JetBrainsMono Nerd Font Mono 10"
-    , additionalFonts = [ "JetBrainsMono Nerd Font Mono 18" ]
+    { font            = "Iosevka Nerd Font Mono 11"
+    , additionalFonts = [ "Iosevka Nerd Font Mono 14" ]
     , bgColor         = colorBg
     , fgColor         = colorFg
     , border          = BottomB
     , borderColor     = colorBlue
-    --, borderColor     = colorYellow
-    , position        = TopSize L 100 26
-    , lowerOnStart    = True
-    , hideOnStart     = False
+    , position        = TopSize L 100 24
     , allDesktops     = True
     , persistent      = True
-    , iconRoot        = "~/.config/xmonad/xpm/"
     , alpha           = 255
     , alignSep        = "}{"
     }

@@ -44,7 +44,7 @@ locker :: String
 locker = "slock"
 
 launcher :: String
-launcher = "dmenu_run -n -s"
+launcher = "dmenu_run -c -l 20"
 
 modMask' :: KeyMask
 modMask' = mod4Mask

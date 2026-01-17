@@ -13,7 +13,7 @@ name' = stringProperty "WM_NAME"
 
 -- | Janelas que devem ser ignoradas (não gerenciadas pelo XMonad)
 myIgnores :: [String]
-myIgnores =  ["trayer","stalonetray"] -- ex: ["trayer","stalonetray"]
+myIgnores = [] -- ex: ["trayer","stalonetray"]
 
 -- | Janelas que devem flutuar
 myFloats :: [String]
@@ -34,6 +34,7 @@ myClassShifts =
   , ("spotify"      , "5"  )  -- music → 音
   , ("youtube-music", "5"  )
   , ("PrismLauncher", "4"  )  -- games → 遊
+  , ("lunarclient"  , "4"  )
   , ("Vim"          , "1"  )  -- doom → 闇
   , ("nvim"         , "1"  )
   , ("Gvim"         , "1"  )
